@@ -1,0 +1,15 @@
+.wrap {
+  input[type='range'] {
+    @apply relative appearance-none bg-transparent w-full;
+
+    &::-webkit-slider-runnable-track {
+      @apply h-1 bg-gray-darkest;
+    }
+
+    &::-webkit-slider-thumb {
+      @apply appearance-none h-5 w-5 bg-gray-lightest cursor-pointer relative -mt-2 z-10;
+      border-radius: 50%;
+      border: 3px solid theme('colors.gray.lightest');
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '../components/Button/button.scss';
+@import '../components/Checkbox/checkbox.scss';
+@import '../components/RangeSlider/range-slider.scss';
