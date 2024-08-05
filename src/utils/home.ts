@@ -1,6 +1,7 @@
+import { CheckboxItem } from '@/components/Checkbox/types';
 import { SET_UPPERCASE, SET_LOWERCASE, SET_SYMBOLS, SET_NUMBERS } from '@/context/passwordContext';
 
-export const checkboxes = [
+export const checkboxes: CheckboxItem[] = [
   {
     id: 1,
     name: 'uppercase',

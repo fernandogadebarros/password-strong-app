@@ -1,45 +1,17 @@
-import React, { createContext, useReducer, Dispatch, ReactNode, useContext } from 'react';
+import React, { createContext, useReducer, ReactNode, useContext } from 'react';
+import { PasswordAction, PasswordContextProps, PasswordState } from './types';
+import {
+  COPY_PASSWORD,
+  GENERATE_PASSWORD,
+  SET_LOWERCASE,
+  SET_NUMBERS,
+  SET_PASSWORD,
+  SET_RANGE,
+  SET_STRENGTH,
+  SET_SYMBOLS,
+  SET_UPPERCASE,
+} from './constants';
 
-// Interfaces para estado e ações
-interface PasswordState {
-  rangeValue: number;
-  includeUppercase: boolean;
-  includeLowercase: boolean;
-  includeNumbers: boolean;
-  includeSymbols: boolean;
-  password: string;
-  strength: 'too weak' | 'weak' | 'medium' | 'strong';
-}
-
-export type PasswordAction =
-  | { type: typeof SET_RANGE; payload: number }
-  | { type: typeof SET_UPPERCASE; payload: boolean }
-  | { type: typeof SET_LOWERCASE; payload: boolean }
-  | { type: typeof SET_NUMBERS; payload: boolean }
-  | { type: typeof SET_SYMBOLS; payload: boolean }
-  | { type: typeof SET_PASSWORD; payload: string }
-  | { type: typeof SET_STRENGTH; payload: 'too weak' | 'weak' | 'medium' | 'strong' }
-  | { type: typeof GENERATE_PASSWORD }
-  | { type: typeof COPY_PASSWORD };
-
-// Criação do contexto
-interface PasswordContextProps {
-  state: PasswordState;
-  dispatch: Dispatch<PasswordAction>;
-}
-
-// Definição das ações
-const SET_RANGE = 'SET_RANGE';
-const SET_UPPERCASE = 'SET_UPPERCASE';
-const SET_LOWERCASE = 'SET_LOWERCASE';
-const SET_NUMBERS = 'SET_NUMBERS';
-const SET_SYMBOLS = 'SET_SYMBOLS';
-const SET_PASSWORD = 'SET_PASSWORD';
-const SET_STRENGTH = 'SET_STRENGTH';
-const GENERATE_PASSWORD = 'GENERATE_PASSWORD';
-const COPY_PASSWORD = 'COPY_PASSWORD';
-
-// Funções auxiliares
 const getRandomCharacter = (characters: string): string => characters[Math.floor(Math.random() * characters.length)];
 
 const generatePassword = (state: PasswordState): string => {
@@ -92,7 +64,6 @@ const usePasswordContext = () => {
   return context;
 };
 
-// Definição do reducer
 const passwordReducer = (state: PasswordState, action: PasswordAction): PasswordState => {
   switch (action.type) {
     case SET_RANGE:
@@ -120,12 +91,8 @@ const passwordReducer = (state: PasswordState, action: PasswordAction): Password
     case COPY_PASSWORD: {
       navigator.clipboard
         .writeText(state.password)
-        .then(() => {
-          alert('Senha copiada para a área de transferência');
-        })
-        .catch(err => {
-          console.error('Erro ao copiar a senha: ', err);
-        });
+        .then(() => alert('Senha copiada para a área de transferência'))
+        .catch(err => console.error('Erro ao copiar a senha: ', err));
       return state;
     }
     default:
@@ -133,7 +100,6 @@ const passwordReducer = (state: PasswordState, action: PasswordAction): Password
   }
 };
 
-// Estado inicial
 const initialState: PasswordState = {
   rangeValue: 10,
   includeUppercase: false,
@@ -144,7 +110,6 @@ const initialState: PasswordState = {
   strength: 'too weak',
 };
 
-// Criação do provider
 const PasswordProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(passwordReducer, initialState);
 

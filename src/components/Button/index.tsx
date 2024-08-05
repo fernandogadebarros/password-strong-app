@@ -1,10 +1,7 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React from 'react';
 import { clsx } from 'clsx';
+import { ButtonProps } from './types';
 
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
-
-const Button: FC<ButtonProps> = ({ className, ...props }) => {
+export const Button = ({ className, ...props }: ButtonProps) => {
   return <button className={clsx('button', className)} {...props} />;
 };
-
-export default Button;

@@ -1,14 +1,7 @@
 import React, { HTMLAttributes } from 'react';
+import { CheckBoxProps } from './types';
 
-interface CheckBoxProps extends HTMLAttributes<HTMLInputElement> {
-  id: string;
-  name: string;
-  text: string;
-  checked: boolean;
-  className?: string;
-}
-
-const Checkbox = ({ id, name, text, checked, ...props }: CheckBoxProps) => {
+export const Checkbox = ({ id, name, text, checked, ...props }: CheckBoxProps) => {
   return (
     <div className="checkbox-group">
       <input type="checkbox" id={id} name={name} checked={checked} {...props} />
@@ -16,5 +9,3 @@ const Checkbox = ({ id, name, text, checked, ...props }: CheckBoxProps) => {
     </div>
   );
 };
-
-export default Checkbox;

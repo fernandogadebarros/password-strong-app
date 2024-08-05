@@ -1,38 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../Card';
+import { Card } from '../Card';
+import { getStrengthStatus } from './utils';
+import { StrengthDisplayProps } from './types';
 
-const StrengthDisplay = ({ strength }: { strength: string }) => {
+export const StrengthDisplay = ({ strength }: StrengthDisplayProps) => {
   const [strengthLength, setStrengthLength] = useState(1);
   const [strengthText, setStrengthText] = useState('TOO WEAK');
   const [strengthStatus, setStrengthStatus] = useState('border-red-light bg-red-light');
 
   useEffect(() => {
-    switch (strength) {
-      case 'too weak':
-        setStrengthLength(1);
-        setStrengthText('TOO WEAK');
-        setStrengthStatus('border-red-light bg-red-light');
-        break;
-
-      case 'weak':
-        setStrengthLength(2);
-        setStrengthText('WEAK');
-        setStrengthStatus('border-orange-light bg-orange-light');
-        break;
-
-      case 'medium':
-        setStrengthLength(3);
-        setStrengthText('MEDIUM');
-        setStrengthStatus('border-yellow-light bg-yellow-light');
-
-        break;
-      case 'strong':
-        setStrengthLength(4);
-        setStrengthText('STRONG');
-        setStrengthStatus('border-green-light bg-green-light');
-
-        break;
-    }
+    getStrengthStatus({
+      strength,
+      setStrengthLength,
+      setStrengthText,
+      setStrengthStatus,
+    });
   }, [strength]);
 
   return (
@@ -41,15 +23,12 @@ const StrengthDisplay = ({ strength }: { strength: string }) => {
       <div className="flex items-center gap-4 font-semibold">
         {strengthText}
         <div className="flex gap-1">
-          {Array.from({ length: 4 }, (_, index) => {
-            return (
-              <span key={index} className={`w-2 h-6 border-2 ${index < strengthLength ? strengthStatus : 'border-white'}`} />
-            );
+          {Array.from({ length: 4 }, (_, strengthIndex) => {
+            const checkStrengthStatusBars = strengthIndex < strengthLength ? strengthStatus : 'border-white';
+            return <span key={`strength_${strengthIndex}`} className={`w-2 h-6 border-2 ${checkStrengthStatusBars}`} />;
           })}
         </div>
       </div>
     </Card>
   );
 };
-
-export default StrengthDisplay;

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --toastify-color-progress-dark: theme('colors.green.light');
+}
+
 @import '../components/Button/button.scss';
 @import '../components/Checkbox/checkbox.scss';
 @import '../components/RangeSlider/range-slider.scss';
+
+.Toastify__progress-bar-theme--dark {
+  background: var(--toastify-color-progress-dark);
+}

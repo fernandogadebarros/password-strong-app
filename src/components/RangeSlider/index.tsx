@@ -1,7 +1,8 @@
 'use client';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent } from 'react';
+import { RangeSliderProps } from './types';
 
-const RangeSlider = ({ rangeValue, setRangeValue }: { rangeValue: number; setRangeValue: Dispatch<SetStateAction<number>> }) => {
+export const RangeSlider = ({ rangeValue, setRangeValue }: RangeSliderProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.target as HTMLInputElement;
     setRangeValue(Number(target.value));
@@ -13,5 +14,3 @@ const RangeSlider = ({ rangeValue, setRangeValue }: { rangeValue: number; setRan
     </div>
   );
 };
-
-export default RangeSlider;

@@ -1,12 +1,7 @@
-import React, { HTMLAttributes, ReactNode } from 'react';
+import React from 'react';
 import { clsx } from 'clsx';
+import { CardProps } from './types';
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-
-const Card = ({ className, children }: CardProps) => {
+export const Card = ({ className, children }: CardProps) => {
   return <div className={clsx(['bg-gray-dark text-gray-lightest', className])}>{children}</div>;
 };
-
-export default Card;
