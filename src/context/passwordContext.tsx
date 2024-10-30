@@ -88,13 +88,6 @@ const passwordReducer = (state: PasswordState, action: PasswordAction): Password
         strength: getPasswordStrength(newPassword),
       };
     }
-    case COPY_PASSWORD: {
-      navigator.clipboard
-        .writeText(state.password)
-        .then(() => alert('Senha copiada para a área de transferência'))
-        .catch(err => console.error('Erro ao copiar a senha: ', err));
-      return state;
-    }
     default:
       return state;
   }

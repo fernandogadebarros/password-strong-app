@@ -11,7 +11,7 @@ export const checkboxes: CheckboxItem[] = [
   {
     id: 2,
     name: 'lowercase',
-    text: 'Include Lowercase Letters"',
+    text: 'Include Lowercase Letters',
     type: SET_LOWERCASE,
   },
   {
